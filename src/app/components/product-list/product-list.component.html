@@ -1,0 +1,15 @@
+<section class="product-list">
+    <div class="container">
+        <div class="products-container">
+            @if (hasDataLoaded) {
+                @for (product of products; track product.id){
+                    <app-product />
+                }     
+            } @else {
+                <div class="loader-overlay">
+                    <div class="loader"></div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
