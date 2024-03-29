@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { ProductComponent } from './product/product.component';
-import { ProductService } from '../../services/product.service';
+import { ProductService } from '../../../services/product.service';
 import { Subscription } from 'rxjs';
-import { Product } from '../../models/product.interface';
+import { Product } from '../../../models/product.interface';
 
 @Component({
   selector: 'app-product-list',

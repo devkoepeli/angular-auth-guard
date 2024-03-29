@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="filter-container">
+        <div>Sort by Category</div>
+        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+            <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off"
+                [(ngModel)]="isElectronicsChecked" (change)="changeFilterState('electronics', isElectronicsChecked)">
+            <label class="btn btn-outline-primary" for="btncheck1">Electronics</label>
+
+            <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off" [(ngModel)]="isJeweleryChecked"
+                (change)="changeFilterState('jewelery', isJeweleryChecked)">
+            <label class="btn btn-outline-primary" for="btncheck2">Jewelery</label>
+
+            <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off" [(ngModel)]="isMensChecked"
+                (change)="changeFilterState('men\'s clothing', isMensChecked)">
+            <label class="btn btn-outline-primary" for="btncheck3">Men's clothing</label>
+
+            <input type="checkbox" class="btn-check" id="btncheck4" autocomplete="off" [(ngModel)]="isWomensChecked"
+                (change)="changeFilterState('women\'s clothing', isWomensChecked)">
+            <label class="btn btn-outline-primary" for="btncheck4">Women's clothing</label>
+        </div>
+    </div>
+</div>
