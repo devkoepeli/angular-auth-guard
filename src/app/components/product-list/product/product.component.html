@@ -1,7 +1,8 @@
 <div class="card">
-    <img class="card-img-top" src="..." alt="Image">
+    <img class="card-img-top" [src]="product().image" alt="Image">
     <div class="card-body">
-        <h5 class="card-title">Product title</h5>
-        <p class="card-text">Product text</p>
+        <h5 class="card-title">{{ product().title }}</h5>
+        <p class="card-text price">{{ product().price }} CHF</p>
+        <p class="card-text">{{ product().description }}</p>
     </div>
 </div>
