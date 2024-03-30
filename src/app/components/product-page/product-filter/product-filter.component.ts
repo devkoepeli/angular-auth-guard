@@ -1,5 +1,4 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { ProductService } from '../../../services/product.service';
 import { Filter } from '../../../models/filter.type';
 import { FilterService } from '../../../services/filter.service';
 import { FormsModule } from '@angular/forms';
@@ -14,8 +13,6 @@ import { FormsModule } from '@angular/forms';
 export class ProductFilterComponent implements OnInit {
   
   filterService = inject(FilterService);
-
-  filters = this.filterService.getFilter();
 
   isElectronicsChecked = false;
   isJeweleryChecked = false;

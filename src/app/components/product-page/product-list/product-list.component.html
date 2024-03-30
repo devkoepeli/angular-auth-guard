@@ -4,7 +4,9 @@
             @if (hasDataLoaded) {
                 @for (product of products; track product.id){
                     <app-product [product]="product" />
-                }     
+                } @empty {
+                    <p>No products found in this category.</p>
+                }
             } @else {
                 <div class="loader-overlay">
                     <div class="loader"></div>

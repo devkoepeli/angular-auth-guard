@@ -1,36 +1,36 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Filter } from '../models/filter.type';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FilterService {
-  private filters = signal<Filter[]>(['all']);
+  private filtersSubject = new BehaviorSubject<Filter[]>(['all']);
+  filters$ = this.filtersSubject.asObservable();
 
   constructor() { }
 
   setFilter(filter: Filter): void {
-    this.filters.update(filters => {
-      const updatedFilters = filters.filter(f => f !== 'all' && f !== filter);
-      updatedFilters.push(filter);
-      return updatedFilters;
-    })
-  }
+    const currentFilters = this.filtersSubject.getValue();
+    const updatedFilters = currentFilters.filter(f => f !== 'all' && f !== filter);
 
-  getFilter(): Filter[] {
-    return this.filters();
+    updatedFilters.push(filter);
+    this.filtersSubject.next(updatedFilters);
   }
 
   removeFilter(filter: Filter): void {
-    this.filters.update(filters => filters
-      .filter(f => f !== filter));
+    const currentFilters = this.filtersSubject.getValue();
+    let updatedFilters = currentFilters.filter(f => f !== filter);
 
-    if (this.filters().length === 0) {
-      this.filters.set(['all']);
+    if (updatedFilters.length === 0) {
+      updatedFilters = ['all'];
     }
+
+    this.filtersSubject.next(updatedFilters);
   }
 
   isFilterActive(filter: Filter): boolean {
-    return this.filters().includes(filter);
+    return this.filtersSubject.getValue().includes(filter);
   }
 }
