@@ -1,16 +1,37 @@
 <div class="container">
     <div class="login-card">
         <h2>Login</h2>
-        <form (submit)="submitForm()">
+        <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
             <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Email address</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                placeholder="Enter E-Mail">
+              <label for="email" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
+                    placeholder="Enter E-Mail" formControlName="email"
+                    (focus)="isEmailFocused = true"
+                    (blur)="isEmailFocused = false">
+                @if (email?.invalid && (email?.dirty || email?.touched) || isFormSubmitted) {
+                    @if (email?.errors?.['required']) {
+                        <div class="error-message">Email is required</div>
+                    }
+                    @if (email?.errors?.['pattern'] && !isEmailFocused) {
+                        <div class="error-message">Invalid email</div>
+                    }
+                }
             </div>
             <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1"
-                placeholder="Enter Password">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password"
+                    placeholder="Enter Password" formControlName="password"
+                    (focus)="isPasswordFocused = true"
+                    (blur)="isPasswordFocused = false">
+                @if (password?.invalid && (password?.dirty || password?.touched) || isFormSubmitted) {
+                    @if (password?.errors?.['required']) {
+                        <div class="error-message">Password is required</div>
+                    }
+                    @if (password?.errors?.['pattern'] && !isPasswordFocused) {
+                        <div class="error-message">Password must contain at least one number, one uppercase and lowercase letter,
+                            and at least 8 or more characters</div>
+                    }
+                }
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
