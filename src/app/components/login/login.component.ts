@@ -1,5 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,30 +13,41 @@ import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from '@
 export class LoginComponent {
 
   formBuilder = inject(FormBuilder);
+  authService = inject(AuthService);
+  router = inject(Router);
 
   isEmailFocused = false;
   isPasswordFocused = false;
   isFormSubmitted = false;
+  authError = false;
 
   loginForm = this.formBuilder.group({
     email: ['', [
       Validators.required,
-      Validators.pattern('[^@]+@[^\.]+\..+')
+      Validators.pattern('[^@]+@[^\\.]+\\..+')
     ]],
     password: ['', [
       Validators.required,
-      Validators.pattern('(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}')
+      Validators.pattern('(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}')
     ]]
   })
 
+  // Elementary for authentication guard: LoginComponent, LogoutComponent, ProductService, AuthService, AuthGuard, AppRoutes
   submitForm(): void {
     this.isFormSubmitted = true;
     if (this.loginForm.valid) {
-      this.email?.disable();
-      this.password?.disable();
+      const email = this.email?.value;
+      const password = this.password?.value;
 
-      this.email?.enable();
-      this.password?.enable();
+      if (this.authService.canLogin(email!, password!)) {
+        this.router.navigate(['/products'])
+      } else {
+        this.authError = true;
+        setTimeout(() => {
+          this.authError = false;
+        }, 5000);
+      }
+
       this.isFormSubmitted = false;
     }
   }

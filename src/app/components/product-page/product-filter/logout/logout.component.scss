@@ -1,0 +1,21 @@
+div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+
+    &:hover {
+        color:blue;
+    }
+
+    &:hover .logout-icon{
+        fill:blue;
+        transform: translateX(10px);
+    }
+
+    .logout-icon {
+        width: 30px;
+        fill: inherit;
+        transition: all .1s ease;
+    }
+}

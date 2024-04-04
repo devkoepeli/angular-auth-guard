@@ -2,11 +2,12 @@ import { Component, OnInit, inject } from '@angular/core';
 import { Filter } from '../../../models/filter.type';
 import { FilterService } from '../../../services/filter.service';
 import { FormsModule } from '@angular/forms';
+import { LogoutComponent } from './logout/logout.component';
 
 @Component({
   selector: 'app-product-filter',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, LogoutComponent],
   templateUrl: './product-filter.component.html',
   styleUrl: './product-filter.component.scss'
 })

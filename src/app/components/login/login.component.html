@@ -35,5 +35,8 @@
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+        @if (authError) {
+            <div class="auth-error error-message">Ooops... Looks like you have no permissions</div>
+        }
     </div>
 </div>
